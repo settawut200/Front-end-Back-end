@@ -15,6 +15,18 @@ db.all('SELECT * FROM user', (err, rows) => {
  });
 });
 
+router.get('/user/:id', (req, res) => {
+    db.all('SELECT * FROM user WHERE id = ?', req.params.id, (err, rows) => {
+        if (err) {
+            res.status(500).send(err);
+        }else {
+            if(!row)
+            res.status(200).send(rows);
+        }
+    
+     });
+    });
+
 router.post('/user', (req, res) => {
     const value = req.query;
     db.run("INSERT INTO user (name,email,password,status) VALUES (?,?,?,?)",
